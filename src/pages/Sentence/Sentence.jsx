@@ -5,6 +5,9 @@ import axios from 'axios'
 // Components
 import TextCard from '../../components/TextCard/TextCard'
 
+// Style
+import './Sentence.css'
+
 
 export default () => {
     const [slideIndex, setSlideindex] = useState(0)
@@ -24,11 +27,11 @@ export default () => {
 
     return (
         <>
-            <button onClick={()=>navigate(`/${language}`)}>Fechar</button><br />
+            <button onClick={()=>navigate(`/${language}`)}><i className="fa fa-times" aria-hidden="true"></i></button><br />
 
             {sentencesList && <TextCard mainText={sentencesList[slideIndex].text}  />}
 
-            <div>
+            <div className="buttons-group">
                 <button 
                     disabled={slideIndex <= 0} 
                     onClick={()=>setSlideindex(prev => prev - 1)}

@@ -2,6 +2,10 @@ import React, {useState, useEffect} from 'react'
 import { useParams, Link } from "react-router-dom";
 import axios from 'axios'
 
+import SimpleCard from '../../components/SimpleCard/SimpleCard';
+
+import './Main.css'
+
 export default () => {
     const BASE_URL = 'http://localhost:3001/sentences'
     let { language } = useParams();
@@ -17,17 +21,15 @@ export default () => {
     return(
         <>
             <p>Selecione uma tag...</p>
-            <ul>
+            <div className="cards-list">
                 {
                     tagsList.map((tag, index) =>{
                         return(
-                            <li key={`${tag}-${index}`}>
-                                <Link to={tag}>{tag}</Link>
-                            </li>
+                            <SimpleCard key={`${index}-${tag}`} title={tag} url={`${language}/${tag}`} />
                         )}
                     )
                 }
-            </ul>
+            </div>
         </>
     )
 }

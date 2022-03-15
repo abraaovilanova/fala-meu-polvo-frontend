@@ -1,4 +1,27 @@
-.navbar ul{
+.navbar{
+    position:absolute;
+    width: 100%;
+    height: 4rem;
+    top:0;
+    background-color: rgb(60,60,60);
+}
+
+.navbar__itens{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     list-style: none;
     padding: 0;
+}
+
+.navbar__item{
+    margin: 0.5rem;
+}
+
+.navbar__item a{
+    color: rgb(204,204,204);
+    text-decoration: none;
+}
+.navbar__item a:hover{
+    text-decoration: underline;
 }

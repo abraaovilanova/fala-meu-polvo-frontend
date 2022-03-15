@@ -1,0 +1,13 @@
+.text-card{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25rem;
+    width: 100%;
+    margin: 0 0.5rem;
+
+}
+.text-card__main-text{
+    text-align: center;
+    font-family: Poppins;
+}

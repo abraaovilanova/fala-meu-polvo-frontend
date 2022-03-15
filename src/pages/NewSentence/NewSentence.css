@@ -1,0 +1,13 @@
+form{
+    display: flex;
+    flex-direction: column;
+    color: rgb(204,204,204);
+}
+
+form input{
+    height: 1.5rem;
+}
+
+form select{
+    height: 2rem;
+}

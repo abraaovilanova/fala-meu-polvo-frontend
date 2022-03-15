@@ -1,16 +1,15 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import './Home.css'
+
+import SimpleCard from "../../components/SimpleCard/SimpleCard";
 
 export default ()=>{
     return (
     <>
       <p>Selecione um idioma...</p>
       <div className="cards-list">
-          <div className="card">
-            <Link to="/english">Inglês</Link>
-          </div>
-          <div className="card">
-            <Link to="/french">Francês</Link>
-          </div>
+          <SimpleCard title={"Inglês"} url={'english'} />
+          <SimpleCard title={"Francês"} url={'french'} />
         </div>
     </>
     )

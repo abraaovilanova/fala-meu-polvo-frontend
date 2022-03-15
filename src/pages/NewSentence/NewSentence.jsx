@@ -1,31 +1,32 @@
 import React, { useState } from 'react'
-import parse from 'html-react-parser'
 import axios from 'axios'
 
-const getTheHTMLMainText = (stringText) => {
-    return parse
-        (stringText
-            .replace(/\*([^\*]*[^\*]*)\*/g, '<span style="color:red">$1</span>').replace(/\s\-/g,'<br />-'))
-
-}
+import './NewSentence.css'
 
 export default ()=>{
     const [text, setText] = useState('')
     const [tag, setTag] = useState('')
     const [information, setInformation] = useState('')
     const [language, setLanguage] = useState('')
+    const [showAlert, setShowAlert] = useState(false)
 
 
-    const handleSubimitForm = (e) => {
+    const handleSubimitForm = async (e) => {
         e.preventDefault()
         const BASE_URL = "http://localhost:3001/sentences"
-        const resp = axios.post(BASE_URL, {text, tag, information,language })
+        const resp = await axios.post(BASE_URL, {text, tag, information,language })
+        setShowAlert(resp.status == 200)
+        setText('')
+        setTag('')
+        setInformation('')
+        setLanguage('')
     }
     
     return(
-        <form action="" onSubmit={handleSubimitForm}>
-            <label htmlFor="ftext">Text</label>
-            <input  
+        <form onSubmit={handleSubimitForm}>
+            {showAlert && <div>Frase adicionada com sucesso!</div>}
+            <label htmlFor="ftext">Text: </label>
+            <textarea  
                 id="ftext" 
                 type="text" 
                 value={text}
@@ -33,7 +34,7 @@ export default ()=>{
             />
             <br />
 
-            <label htmlFor="ftag">Tag</label>
+            <label htmlFor="ftag">Tag: </label>
             <input 
                 id="ftag" 
                 type="text" 
@@ -42,7 +43,7 @@ export default ()=>{
             />
             <br />
 
-            <label htmlFor="finformation">Information</label>
+            <label htmlFor="finformation">Information: </label>
             <input 
                 id="finformation" 
                 type="text"
@@ -51,13 +52,17 @@ export default ()=>{
             />
             <br />
 
-            <label htmlFor="flanguage">Language</label>
-            <input 
+            <label htmlFor="flanguage">Language: </label>
+            <select
                 id="flanguage" 
-                type="text" 
+                type="text"
                 value={language}
                 onChange={(e)=>setLanguage(e.target.value)}
-            />
+            >
+                <option></option>
+                <option value="french">French</option>
+                <option value="english">English</option>
+            </select>
             <br />
             <input type="submit" value="enviar"/>
         </form>
