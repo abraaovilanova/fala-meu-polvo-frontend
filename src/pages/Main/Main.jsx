@@ -7,13 +7,18 @@ import SimpleCard from '../../components/SimpleCard/SimpleCard';
 import './Main.css'
 
 export default () => {
-    const BASE_URL = 'http://localhost:3001/sentences'
+    const BASE_URL = 'https://fala-meu-polvo-api.herokuapp.com/sentences'
     let { language } = useParams();
 
     const [ tagsList, setTagsList] = useState([])
 
     useEffect(async ()=>{
-        const tagsList = await axios.get(BASE_URL + '/' + language)
+        const token = localStorage.getItem('token')
+
+        const tagsList = await axios.get(BASE_URL + '/' + language,{
+            headers: {
+                'Authorization': `Bearer ${token}`
+              }})
         setTagsList(tagsList.data.tags)
     },[])
 

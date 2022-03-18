@@ -17,8 +17,12 @@ export default () => {
     let navigate = useNavigate();
 
     useEffect(async ()=>{
-        const BASE_URL = 'http://localhost:3001/sentences'
-        const resp = await axios.get(BASE_URL + `/${language}/${tag}`)
+        const token = localStorage.getItem('token')
+        const BASE_URL = 'https://fala-meu-polvo-api.herokuapp.com/sentences'
+        const resp = await axios.get(BASE_URL + `/${language}/${tag}`,{
+            headers: {
+                'Authorization': `Bearer ${token}`
+              }})
 
         const respArray = resp.data.sentencesList
         const shuffledArray = respArray.sort((a, b) => 0.5 - Math.random());
