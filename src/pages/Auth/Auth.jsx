@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { Link } from "react-router-dom";
 
 // redux
 import { connect } from 'react-redux'
@@ -55,6 +56,7 @@ const Auth =  (props) => {
 
     return (
         <form onSubmit={(e)=>handleSubmit(e)}>
+            <p>Faça o {props.formType}</p>
             {signinRender}
             <label>User: </label>
             <input 
@@ -70,6 +72,15 @@ const Auth =  (props) => {
                 onChange={(e)=>setPassword(e.target.value)}
             />
             <br />
+            {props.formType === 'login' ?  
+                <>
+                    Não tem uma conta? <Link to="/auth/signup">Cadastre-se</Link>
+                </> 
+                : 
+                <>
+                    Já tenho uma conta,<Link to="/auth/login"> fazer login</Link>
+                </>
+            }
             <input type="submit" value={`${props.formType}`} />
         </form>
     )

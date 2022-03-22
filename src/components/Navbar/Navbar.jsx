@@ -16,11 +16,8 @@ const Navbar = (props) => {
 
     const history = useNavigate()
 
-    console.log(user, 'navbar')
-
     const token = localStorage.getItem('token')
 
-    // TODO: CONECT LOGOUT WITH REDUX STATE
     const handleLogout = () => {
         logout(history)
     }
@@ -33,12 +30,14 @@ const Navbar = (props) => {
                         <i className="fa fa-home" aria-hidden="true" />
                     </Link>
                 </li>
-                <li className="navbar__item"><Link to="/new-sentence"><i className="fa fa-pencil-square-o" aria-hidden="true" /></Link></li>
+                {user.isLoggedIn && 
+                    <li className="navbar__item"><Link to="/new-sentence"><i className="fa fa-pencil-square-o" aria-hidden="true" /></Link></li>
+                }
                 <li className="navbar__item">
                     {!user.isLoggedIn ?
                         <>
-                            <Link to="/auth/signup"> sign up </Link> /
-                            <Link to="/auth/login"> entrar </Link>
+                            {/* <Link to="/auth/signup"> sign up </Link> */}
+                            <Link to="/auth/login"><i className="fa fa-sign-in" aria-hidden="true" /></Link>
                         </> 
                         : 
                         <>
@@ -47,6 +46,7 @@ const Navbar = (props) => {
                     }
                 
                 </li>
+                {/* <li className="navbar__item"><i className="fa fa-ellipsis-h" aria-hidden="true" /></li> */}
             </ul> 
         </nav>
     )

@@ -4,4 +4,15 @@
     justify-content: center;
 }
 
+img {
+    width: 45%;
+}
+
+@media (min-width: 500px) {
+    img {
+        width: 20%;
+    }
+    
+}
+
 

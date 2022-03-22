@@ -12,6 +12,7 @@ import './Sentence.css'
 export default () => {
     const [slideIndex, setSlideindex] = useState(0)
     const [sentencesList, setSentencesList] = useState(undefined)
+    const [loading, setLoading] = useState(true)
 
     let { language, tag } = useParams();
     let navigate = useNavigate();
@@ -27,29 +28,38 @@ export default () => {
         const respArray = resp.data.sentencesList
         const shuffledArray = respArray.sort((a, b) => 0.5 - Math.random());
         setSentencesList(shuffledArray)
+        setLoading(false)
     },[])
 
     return (
         <>
-            <button onClick={()=>navigate(`/${language}`)}><i className="fa fa-times" aria-hidden="true"></i></button><br />
-
-            {sentencesList && <TextCard mainText={sentencesList[slideIndex].text}  />}
-
-            <div className="buttons-group">
-                <button 
-                    disabled={slideIndex <= 0} 
-                    onClick={()=>setSlideindex(prev => prev - 1)}
-                >
-                    <i className="fa fa-arrow-left" aria-hidden="true" />
-                </button>
-                
-                <button 
-                    disabled={sentencesList ? slideIndex >= sentencesList.length - 1: false} 
-                    onClick={()=>setSlideindex(prev => prev + 1)}
-                >
-                    <i className="fa fa-arrow-right" aria-hidden="true" />
-                </button>
-            </div>
+            {loading ? 
+                <div className="loading">
+                    Carregando...
+                </div>
+                :
+                <>
+                    <button onClick={()=>navigate(`/${language}`)}><i className="fa fa-times" aria-hidden="true"></i></button><br />
+                    
+                    {sentencesList && <TextCard mainText={sentencesList[slideIndex].text}  />}
+        
+                    <div className="buttons-group">
+                        <button 
+                            disabled={slideIndex <= 0} 
+                            onClick={()=>setSlideindex(prev => prev - 1)}
+                        >
+                            <i className="fa fa-arrow-left" aria-hidden="true" />
+                        </button>
+                        {slideIndex+1} / {sentencesList?.length}
+                        <button 
+                            disabled={sentencesList ? slideIndex >= sentencesList.length - 1: false} 
+                            onClick={()=>setSlideindex(prev => prev + 1)}
+                        >
+                            <i className="fa fa-arrow-right" aria-hidden="true" />
+                        </button>
+                    </div>
+                </>
+            }
         </>
     )
 }

@@ -24,3 +24,7 @@ button:disabled{
   color:rgb(60,60,60);
   border: 0.2rem solid rgb(60,60,60);
 }
+
+a {
+  text-decoration: none;
+}
