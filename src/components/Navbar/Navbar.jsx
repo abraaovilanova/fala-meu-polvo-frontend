@@ -30,19 +30,19 @@ const Navbar = (props) => {
             <ul className="navbar__itens">
                 <li className="navbar__item">
                     <Link to="/">
-                        <i className="fa fa-home" aria-hidden="true" /> Inicio
+                        <i className="fa fa-home" aria-hidden="true" />
                     </Link>
                 </li>
-                <li className="navbar__item"><Link to="/new-sentence"><i className="fa fa-pencil" aria-hidden="true" /> Nova frase</Link></li>
+                <li className="navbar__item"><Link to="/new-sentence"><i className="fa fa-pencil-square-o" aria-hidden="true" /></Link></li>
                 <li className="navbar__item">
                     {!user.isLoggedIn ?
                         <>
-                            <Link to="/auth/login"> Login </Link>
-                            <Link to="/auth/signup"> Sign up </Link>
+                            <Link to="/auth/signup"> sign up </Link> /
+                            <Link to="/auth/login"> entrar </Link>
                         </> 
                         : 
                         <>
-                            <a onClick={()=>handleLogout()}>Logout</a>
+                            <a onClick={()=>handleLogout()}><i className="fa fa-sign-out" aria-hidden="true"/></a>
                         </>
                     }
                 

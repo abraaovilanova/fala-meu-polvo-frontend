@@ -1,7 +1,7 @@
 form{
     display: flex;
     flex-direction: column;
-    color: rgb(204,204,204);
+    color: rgb(30,30,30);
 }
 
 form input{

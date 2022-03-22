@@ -5,7 +5,7 @@ import './TextCard.css'
 const getTheHTMLMainText = (stringText) => {
     return parse
         (stringText
-            .replace(/\*([^\*]*[^\*]*)\*/g, '<span style="color:rgb(197,134,192)">$1</span>').replace(/\s\-/g,'<br />-'))
+            .replace(/\*([^\*]*[^\*]*)\*/g, '<span style="font-weight: 700">$1</span>').replace(/\s\-/g,'<br />-'))
 
 }
 

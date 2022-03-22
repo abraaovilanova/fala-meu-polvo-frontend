@@ -8,9 +8,14 @@ import './Main.css'
 
 export default () => {
     const BASE_URL = 'https://fala-meu-polvo-api.herokuapp.com/sentences'
+
     let { language } = useParams();
 
+    const [searchQuery, setSearchQuery] = useState('')
+
     const [ tagsList, setTagsList] = useState([])
+
+    const [ filtredTagGroup, setFiltredTagGroup] = useState(tagsList)
 
     useEffect(async ()=>{
         const token = localStorage.getItem('token')
@@ -20,21 +25,40 @@ export default () => {
                 'Authorization': `Bearer ${token}`
               }})
         setTagsList(tagsList.data.tags)
+        setFiltredTagGroup(tagsList.data.tags)
     },[])
+
+    const handleFilterTagsBySearchQuery = (e) =>{
+        setSearchQuery(e.target.value)
+        if(e.target.value){
+            setFiltredTagGroup(tagsList.filter((value)=>value.includes(e.target.value)))
+        }else{
+            setFiltredTagGroup(tagsList)
+        }
+
+    }
 
     
     return(
-        <>
-            <p>Selecione uma tag...</p>
+        <div className="main">
+            <p>Escolha o que aprender hoje...</p>
+            <div className="search-input">
+            <i className="fa fa-search" aria-hidden="true" />
+                <input 
+                    type="search" 
+                    placeholder='Procurar...' 
+                    onChange={(e)=>handleFilterTagsBySearchQuery(e)}
+                />
+            </div>
             <div className="cards-list">
                 {
-                    tagsList.map((tag, index) =>{
+                    filtredTagGroup.map((tag, index) =>{
                         return(
                             <SimpleCard key={`${index}-${tag}`} title={tag} url={`${language}/${tag}`} />
                         )}
                     )
                 }
             </div>
-        </>
+        </div>
     )
 }
