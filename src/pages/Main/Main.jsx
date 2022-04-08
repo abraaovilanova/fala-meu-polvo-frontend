@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import axios from 'axios'
 
 import SimpleCard from '../../components/SimpleCard/SimpleCard';
+import Loader from '../../components/Loader/Loader';
 
 import './Main.css'
 
@@ -17,6 +18,8 @@ export default () => {
 
     const [ filtredTagGroup, setFiltredTagGroup] = useState(tagsList)
 
+    const [loading, setLoading] = useState(true)
+
     useEffect(async ()=>{
         const token = localStorage.getItem('token')
 
@@ -26,6 +29,7 @@ export default () => {
               }})
         setTagsList(tagsList.data.tags)
         setFiltredTagGroup(tagsList.data.tags)
+        setLoading(false)
     },[])
 
     const handleFilterTagsBySearchQuery = (e) =>{
@@ -41,6 +45,10 @@ export default () => {
     
     return(
         <div className="main">
+            { loading ? 
+            <Loader /> 
+            :
+            <>
             <p>Escolha o que aprender hoje...</p>
             <div className="search-input">
             <i className="fa fa-search" aria-hidden="true" />
@@ -59,6 +67,7 @@ export default () => {
                     )
                 }
             </div>
+            </>}
         </div>
     )
 }

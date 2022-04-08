@@ -5,6 +5,7 @@ import './Home.css'
 import { connect } from 'react-redux'
 
 import SimpleCard from "../../components/SimpleCard/SimpleCard";
+import Loader from "../../components/Loader/Loader";
 
 const Home = (props)=>{
   const { user } = props
