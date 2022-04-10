@@ -23,7 +23,14 @@ export default () => {
     const buttonIsDisablad = sentencesList ? slideIndex >= sentencesList.length - 1: false
 
     const { speak, voices, speaking } = useSpeechSynthesis()
-    const selectedVoice = language == 'english' ? voices[3] : voices[8]
+    const voicesFilter = voices.filter(e => {
+        if(['fr-FR','en-US'].includes(e.lang)){
+            return e
+        }
+    })
+    console.log(voicesFilter)
+    const selectedVoice = language == 'english' ? voicesFilter[0] : voicesFilter[1]
+
 
     useEffect(async ()=>{
         const token = localStorage.getItem('token')
