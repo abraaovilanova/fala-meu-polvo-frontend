@@ -36,7 +36,6 @@ const Navbar = (props) => {
                 <li className="navbar__item">
                     {!user.isLoggedIn ?
                         <>
-                            {/* <Link to="/auth/signup"> sign up </Link> */}
                             <Link to="/auth/login"><i className="fa fa-sign-in" aria-hidden="true" /></Link>
                         </> 
                         : 
@@ -46,7 +45,6 @@ const Navbar = (props) => {
                     }
                 
                 </li>
-                {/* <li className="navbar__item"><i className="fa fa-ellipsis-h" aria-hidden="true" /></li> */}
             </ul> 
         </nav>
     )

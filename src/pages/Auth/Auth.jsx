@@ -8,6 +8,8 @@ import { LoginAuthAction, SignUpAuthAction } from '../../redux/actions/authActio
 
 import { useNavigate  } from 'react-router-dom'
 
+import './Auth.css'
+
 const Auth =  (props) => {
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
@@ -19,15 +21,16 @@ const Auth =  (props) => {
 
     const { user } = props
 
-    const signinRender = props.formType === 'signin' ? (
-        <>
-            <label>Name</label>
+    const signupRender = props.formType === 'signup' ? (
+        <div className="auth-form__input-group">
+            <label className="auth-form__input-title">Nome</label>
             <input 
                 type="text" 
                 value={name}
                 onChange={(e)=>setName(e.target.value)}
+                className="auth-form__input"
             />
-        </>
+        </div>
     ) : ''
 
     async function handleSubmit(e){
@@ -43,7 +46,7 @@ const Auth =  (props) => {
             login(body, history)
         }
 
-        if(props.formType === 'signin'){
+        if(props.formType === 'signup'){
             signup(body,history)
             
         }
@@ -55,23 +58,36 @@ const Auth =  (props) => {
     }
 
     return (
-        <form onSubmit={(e)=>handleSubmit(e)}>
-            <p>Faça o {props.formType}</p>
-            {signinRender}
-            <label>User: </label>
-            <input 
-                type="text" 
-                value={userName}
-                onChange={(e)=>setUserName(e.target.value)}
-            />
+        <form 
+            onSubmit={(e)=>handleSubmit(e)}
+            className="auth-form"
+        >
+            <p className="auth-form__title">Faça o seu {props.formType == 'signup' ? 'Cadastro' : props.formType}</p>
 
-            <label>Password: </label>
-            <input 
-                type="password"
-                value={password}
-                onChange={(e)=>setPassword(e.target.value)}
-            />
+            {signupRender}
+            
+            <div className="auth-form__input-group">
+                <label className="auth-form__input-title">Usuário: </label>
+                <input 
+                    type="text" 
+                    value={userName}
+                    onChange={(e)=>setUserName(e.target.value)}
+                    className="auth-form__input"
+                />
+            </div>
+
+            <div className="auth-form__input-group">
+                <label className="auth-form__input-title">Senha: </label>
+                <input 
+                    type="password"
+                    value={password}
+                    onChange={(e)=>setPassword(e.target.value)}
+                    className="auth-form__input"
+                />
+            </div>
+
             <br />
+
             {props.formType === 'login' ?  
                 <>
                     Não tem uma conta? <Link to="/auth/signup">Cadastre-se</Link>
@@ -81,6 +97,9 @@ const Auth =  (props) => {
                     Já tenho uma conta,<Link to="/auth/login"> fazer login</Link>
                 </>
             }
+
+            <br />
+            
             <input type="submit" value={`${props.formType}`} />
         </form>
     )

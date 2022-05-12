@@ -17,7 +17,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/auth/signup" element={<Auth formType="signin"/>} />
+        <Route path="/auth/signup" element={<Auth formType="signup"/>} />
         <Route path="/auth/login" element={<Auth formType="login" />} />
         <Route path="/new-sentence" element={<NewSentence />} />
         <Route path="/comunidade" element={<h1>Aqui será a comunidade</h1>} />

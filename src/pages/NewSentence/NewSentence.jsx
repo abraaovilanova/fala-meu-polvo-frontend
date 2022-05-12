@@ -36,24 +36,42 @@ export default ()=>{
     }
     
     return(
-        <form onSubmit={handleSubimitForm}>
-            { text && <div>{getTheHTMLMainText(text)}</div>}
+        <form 
+            className="add-sentence-form" 
+            onSubmit={handleSubimitForm}
+        >
+            <div className="add-sentence-form__text-display">
+                { text && <div>{getTheHTMLMainText(text)}</div>}
+            </div>
+
             <br/>
+
             {showAlert && <div>Frase adicionada com sucesso!</div>}
-            <label htmlFor="flanguage">Language: </label>
-            <select
-                id="flanguage" 
-                type="text"
-                value={language}
-                onChange={(e)=>setLanguage(e.target.value)}
-            >
-                <option></option>
-                <option value="french">French</option>
-                <option value="english">English</option>
-            </select>
+
+            <div className="add-sentence-form__input-group">
+                <label 
+                    className="add-sentence-form__input-title" 
+                    htmlFor="flanguage"
+                >
+                    Language: 
+                </label>
+                <select
+                    className="add-sentence-form__select"
+                    id="flanguage" 
+                    type="text"
+                    value={language}
+                    onChange={(e)=>setLanguage(e.target.value)}
+                >
+                    <option value="french">Francês</option>
+                    <option value="english">Inglês</option>
+                </select>
+            </div>
             <br />
-            <label htmlFor="ftext">Text: </label>
+            <label 
+                className="add-sentence-form__input-title"
+                htmlFor="ftext">Text: </label>
             <textarea  
+                className="add-sentence-form__textarea"
                 id="ftext" 
                 type="text" 
                 value={text}
@@ -61,8 +79,11 @@ export default ()=>{
             />
             <br />
 
-            <label htmlFor="ftag">Tag: </label>
+            <label
+                className="add-sentence-form__input-title" 
+                htmlFor="ftag">Tag: </label>
             <input 
+                className="add-sentence-form__input"
                 id="ftag" 
                 type="text" 
                 value={tag}
@@ -70,8 +91,11 @@ export default ()=>{
             />
             <br />
 
-            <label htmlFor="finformation">Information: </label>
+            <label
+                className="add-sentence-form__input-title" 
+                htmlFor="finformation">Information: </label>
             <input 
+                className="add-sentence-form__input"
                 id="finformation" 
                 type="text"
                 value={information}
